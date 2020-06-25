@@ -25,6 +25,7 @@ dependencies:
   flashlight: ^0.1.1
   vibration: ^1.4.0
   device_info: ^0.4.2+4
+  flutter_compass: ^0.4.2+1
   flutter:
     sdk: flutter
 
