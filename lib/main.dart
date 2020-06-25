@@ -55,6 +55,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context){
+    //세로 화면 고정
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
     return Scaffold(
       body: Center(child: _pages[_selectedIndex]),
       bottomNavigationBar: BottomNavigationBar(
