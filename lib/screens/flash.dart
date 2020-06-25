@@ -1,6 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flashlight/flashlight.dart';
 
-class Flash extends StatelessWidget {
+class Flash extends StatefulWidget {
+  @override
+  _FlashState createState() => _FlashState();
+}
+
+class _FlashState extends State<Flash> {
+
+  bool _hasFlashlight = false;
+
+  @override
+  initState() {
+    super.initState();
+    initFlashlight();
+  }
+
+  initFlashlight() async {
+    bool hasFlash = await Flashlight.hasFlashlight;
+    print("Device has flash ? $hasFlash");
+    setState(() {
+      _hasFlashlight = hasFlash;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -14,23 +37,17 @@ class Flash extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.only(top: 8.0),
                   child: Column(children: <Widget>[
-                    RaisedButton(
-                        child: Text('실행', style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.black)),
-                        onPressed: null)
-                    ,
                   ]),
                 ),
               )),
           appBar: AppBar(
             centerTitle: true,
-            title: Text(
-              '손전등',
-              style:
-              TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-            ),
+            title: Text('손전등', style: TextStyle(
+                color: Colors.black, fontWeight: FontWeight.bold),),
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () {
+                Flashlight.lightOff();
                 Navigator.pop(context);
               },
             ),
@@ -46,9 +63,16 @@ class Flash extends StatelessWidget {
                   fit: BoxFit.contain,
                 ),
               ),
-              new Padding(padding: EdgeInsets.only(top: 50.0)),
-              Text('손전등 기능이 작동됩니다',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0))
+              Padding(padding: EdgeInsets.only(top: 50.0)),
+              Text(_hasFlashlight ? '' : '손전등이 없는 기종입니다.'),
+              RaisedButton(
+                child: Text('켜기'),
+                onPressed: () => Flashlight.lightOn(),
+              ),
+              RaisedButton(
+                child: Text('끄기'),
+                onPressed: () => Flashlight.lightOff(),
+              )
             ],
           ),
         ));
