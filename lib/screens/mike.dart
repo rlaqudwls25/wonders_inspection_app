@@ -114,7 +114,7 @@ class _MikeState extends State<Mike> with SingleTickerProviderStateMixin, Widget
       ..forward();
   }
 
-  Color _getBgColor() => (isRecording) ? Colors.red : Colors.cyan;
+  Color _getBgColor() => (isRecording) ? Colors.cyan : Colors.red;
 
   @override
   Widget build(BuildContext context) {
@@ -161,7 +161,7 @@ class _MikeState extends State<Mike> with SingleTickerProviderStateMixin, Widget
                             Icons.keyboard_voice, size: 80,
                             color: Colors.white),
                         decoration: BoxDecoration(
-                            color: (isRecording) ? Colors.red : Colors.cyan,
+                            color: (isRecording) ? Colors.cyan : Colors.red,
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
