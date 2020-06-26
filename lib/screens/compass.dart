@@ -10,6 +10,7 @@ class Compass extends StatefulWidget {
 
 class _CompassState extends State<Compass> {
   double _heading = 0;
+  bool isDisposed = false;
 
   String get _readout => _heading.toStringAsFixed(0) + '°';
 
@@ -19,9 +20,18 @@ class _CompassState extends State<Compass> {
     FlutterCompass.events.listen(_onData);
   }
 
-  void _onData(double x) => setState(() {
+  @override
+  void dispose() {
+    super.dispose();
+    isDisposed = true;
+  }
+
+  void _onData(double x) {
+    if (!isDisposed)
+      setState(() {
         _heading = x;
       });
+  }
 
   final TextStyle _style = TextStyle(
     color: Colors.black,
