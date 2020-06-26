@@ -99,7 +99,7 @@ class Implement extends StatelessWidget {
     );
   }
 
-  Widget _buildButton(String text, context, Page) {
+  Widget _buildButton(String text, context, page) {
     return Container(
       padding: EdgeInsets.all(10),
       width: 120,
@@ -107,7 +107,7 @@ class Implement extends StatelessWidget {
       alignment: Alignment.center,
       child: new RaisedButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => Page)
+          Navigator.push(context, MaterialPageRoute(builder: (context) => page)
           );
         },
         shape: CircleBorder(side: BorderSide(width: 1)),
