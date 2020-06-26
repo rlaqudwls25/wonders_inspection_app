@@ -7,8 +7,8 @@ class Flash extends StatefulWidget {
 }
 
 class _FlashState extends State<Flash> {
-
   bool _hasFlashlight = false;
+  bool _flashOn = false;
 
   @override
   initState() {
@@ -26,24 +26,16 @@ class _FlashState extends State<Flash> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return MaterialApp(
         theme: ThemeData(primarySwatch: Colors.red),
         home: Scaffold(
-          bottomNavigationBar: Container(
-              height: 60.0,
-              child: InkWell(
-                onTap: () => print('tap on close'),
-                child: Padding(
-                  padding: EdgeInsets.only(top: 8.0),
-                  child: Column(children: <Widget>[
-                  ]),
-                ),
-              )),
           appBar: AppBar(
             centerTitle: true,
-            title: Text('손전등', style: TextStyle(
-                color: Colors.black, fontWeight: FontWeight.bold),),
+            title: Text(
+              '손전등',
+              style:
+                  TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+            ),
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () {
@@ -53,26 +45,47 @@ class _FlashState extends State<Flash> {
             ),
           ),
           body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Container(
-                margin: EdgeInsets.all(20),
-                child: Image.asset(
-                  'images/flash.png',
-                  width: 400.0,
-                  height: 250.0,
-                  fit: BoxFit.contain,
+              GestureDetector(
+                onTap: () {
+                  if (_flashOn == false) {
+                    setState(() {
+                      _flashOn = true;
+                    });
+                    Flashlight.lightOn();
+                  } else {
+                    setState(() {
+                      _flashOn = false;
+                    });
+                    Flashlight.lightOff();
+                  }
+                },
+                child: Center(
+                  child: Container(
+                    height: 100,
+                    width: 100,
+                    margin: EdgeInsets.all(20),
+                    child: Icon(Icons.flash_on, size: 50, color: Colors.white),
+                    decoration: BoxDecoration(
+                        color: _flashOn == true ? Colors.cyan : Colors.red,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey[500],
+                            offset: Offset(4.0, 4.0),
+                            blurRadius: 10.0,
+                            spreadRadius: 1.0,
+                          ),
+                        ]),
+                  ),
                 ),
               ),
               Padding(padding: EdgeInsets.only(top: 50.0)),
-              Text(_hasFlashlight ? '' : '손전등이 없는 기종입니다.'),
-              RaisedButton(
-                child: Text('켜기'),
-                onPressed: () => Flashlight.lightOn(),
+              Text(
+                _hasFlashlight ? '손전등 버튼을 눌러보세요.' : '손전등이 없는 기종입니다.',
+                style: TextStyle(fontSize: 18),
               ),
-              RaisedButton(
-                child: Text('끄기'),
-                onPressed: () => Flashlight.lightOff(),
-              )
             ],
           ),
         ));
