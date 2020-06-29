@@ -29,6 +29,7 @@ dependencies:
   sensors: ^0.4.2+2
   camera: ^0.5.8+2
   mic_stream: ^0.2.1
+  flutter_bluetooth_serial: ^0.2.2
   flutter:
     sdk: flutter
 

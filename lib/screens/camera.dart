@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:wondersappver02/main.dart';
 
 
 class Camera extends StatefulWidget {
@@ -67,35 +66,11 @@ class CameraState extends State<Camera> {
         centerTitle: true,
         title: Text('Camera', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),),
       ),
-      backgroundColor: Theme.of(context).backgroundColor,
-      key: _scaffoldKey,
+      backgroundColor: Colors.white,
       extendBody: true,
-      body: Column(
-        children: <Widget>[
-          _buildCameraPreview(),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                RaisedButton(
-                  color: Colors.black,
-                  child: Text("예", style: TextStyle(color: Colors.white, fontSize:  16),),
-                  onPressed: () {
-                  },
-                ),
-              ],
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              RaisedButton(
-                  color : Colors.black,
-                  child: Text("아니오", style: TextStyle(color: Colors.white, fontSize:  16),),
-                  onPressed: (){
-                  }
-              )
-            ],
-          )
-        ],
+      body: Container(
+        padding: EdgeInsets.only(bottom: 165, left: 15, right: 15, top: 15),
+        child: _buildCameraPreview(),
       ),
     );
   }
@@ -103,16 +78,13 @@ class CameraState extends State<Camera> {
     final size = MediaQuery.of(context).size;
     return ClipRect(
       child: Container(
-        child: Transform.scale(
-          scale: _controller.value.aspectRatio / size.aspectRatio,
-          child: Center(
-            child: AspectRatio(
-              aspectRatio: _controller.value.aspectRatio,
-              child: CameraPreview(_controller),
-            ),
+        child: Center(
+          child: AspectRatio(
+            aspectRatio: _controller.value.aspectRatio,
+            child: CameraPreview(_controller),
           ),
         ),
-      ),
-    );
+      ),    );
+
   }
-  }
+}
