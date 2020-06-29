@@ -134,6 +134,12 @@ class _BluetoothState extends State<Bluetooth> {
         appBar: AppBar(
           centerTitle: true,
           title: Text("블루투스", style: TextStyle(color: Colors.black ,fontWeight: FontWeight.bold),),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
           backgroundColor: Colors.red,
           actions: <Widget>[
             FlatButton.icon(
