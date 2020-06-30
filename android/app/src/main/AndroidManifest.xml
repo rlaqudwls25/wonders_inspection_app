@@ -51,5 +51,8 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <!-- 구글 맵 API 키 -->
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDQpOEE5VkpYQW8_jXy3v-lFgYGZUZO338"/>
     </application>
 </manifest>
