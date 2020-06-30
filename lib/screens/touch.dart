@@ -1,49 +1,194 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:positioned_tap_detector/positioned_tap_detector.dart';
 
-class Touch extends StatelessWidget {
+
+
+class Touch extends StatefulWidget {
+  @override
+  TouchState createState() => new TouchState();
+}
+
+class TouchState extends State<Touch> {
+  bool _visible = true;
+
   @override
   Widget build(BuildContext context) {
-    Fluttertoast.showToast(
-        msg: "손가락으로 사각형을 터치하면 사각형이 사라집니다",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 10,
-        backgroundColor: Colors.white,
-        textColor: Colors.black,
-        fontSize: 20.0);
-    return Center(
-      child: Container(
-        child: CustomPaint(
-          painter: Drawhorizontalline(),
+    return MaterialApp(
+      home: Scaffold(
+        body: ListView(
+          children: <Widget>[
+            Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(3.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      _touch(),
+                      _touch(),
+                      _touch(),
+                      _touch(),
+                      _touch(),
+                    ],
+                  ),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.all(4.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          _touch(),
+                          _touch(),
+                          _touch(),
+                          _touch(),
+                          _touch(),
+                        ],
+                      ),
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.all(4.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              _touch(),
+                              _touch(),
+                              _touch(),
+                              _touch(),
+                              _touch(),
+                            ],
+                          ),
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.all(4.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: <Widget>[
+                                  _touch(),
+                                  _touch(),
+                                  _touch(),
+                                  _touch(),
+                                  _touch(),
+                                ],
+                              ),
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                Padding(padding: EdgeInsets.all(4.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: <Widget>[
+                                      _touch(),
+                                      _touch(),
+                                      _touch(),
+                                      _touch(),
+                                      _touch(),
+                                    ],
+                                  ),
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    Padding(padding: EdgeInsets.all(4.0),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        children: <Widget>[
+                                          _touch(),
+                                          _touch(),
+                                          _touch(),
+                                          _touch(),
+                                          _touch(),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    Padding(padding: EdgeInsets.all(4.0),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        children: <Widget>[
+                                          _touch(),
+                                          _touch(),
+                                          _touch(),
+                                          _touch(),
+                                          _touch(),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    Padding(padding: EdgeInsets.all(4.0),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        children: <Widget>[
+                                          _touch(),
+                                          _touch(),
+                                          _touch(),
+                                          _touch(),
+                                          _touch(),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
   }
-}
 
-class Drawhorizontalline extends CustomPainter {
-  Paint _paint;
-
-  Drawhorizontalline() {
-    _paint = Paint()
-      ..color = Colors.white
-      ..strokeWidth = 2
-      ..strokeCap = StrokeCap.round;
+  Widget _touch() {
+    return Container(
+      child: PositionedTapDetector(
+          child: AnimatedOpacity(
+            opacity: _visible ? 1.0:0.0,
+            duration: Duration(microseconds: 500),
+            child: Container(
+              width: 70.0,
+              height: 70.0,
+              color: Colors.lightBlueAccent,
+            ),
+          ),
+          onTap: _onTap
+      ),
+    );
   }
 
-  @override
-  void paint(Canvas canvas, Size size) {
-    for (double i = 0; i <= 400; i += 54) {
-      canvas.drawLine(Offset(-230.0, -i), Offset(230.0, -i), _paint);
-      canvas.drawLine(Offset(-230.0, i), Offset(230.0, i), _paint);
-      canvas.drawLine(Offset(-i, -330.0), Offset(-i, 330.0), _paint);
-      canvas.drawLine(Offset(i, -330.0), Offset(i, 330.0), _paint);
+  void _onTap(TapPosition position) => _updateState("single tap", position);
+
+  void _updateState(String gesture, TapPosition position) {
+    setState(() {
+      _visible =! _visible;
+
     }
+    );
   }
 
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
-  }
+  String _formatOffset(Offset offset) =>
+      "${offset.dx.toStringAsFixed(1)}, ${offset.dy.toStringAsFixed(1)}";
 }

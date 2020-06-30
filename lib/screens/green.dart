@@ -5,7 +5,7 @@ class Green extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.greenAccent[700],
       ),
     );
   }
