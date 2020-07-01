@@ -1,194 +1,104 @@
 import 'package:flutter/material.dart';
-import 'package:positioned_tap_detector/positioned_tap_detector.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-
+void main() {
+  runApp(MaterialApp(
+    home: Touch(),
+  ));
+}
 
 class Touch extends StatefulWidget {
   @override
-  TouchState createState() => new TouchState();
+  _TouchState createState() => new _TouchState();
 }
 
-class TouchState extends State<Touch> {
-  bool _visible = true;
+class _TouchState extends State<Touch> {
+  Color cellColor = Colors.black;
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: ListView(
-          children: <Widget>[
-            Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(3.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      _touch(),
-                      _touch(),
-                      _touch(),
-                      _touch(),
-                      _touch(),
-                    ],
-                  ),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.all(4.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          _touch(),
-                          _touch(),
-                          _touch(),
-                          _touch(),
-                          _touch(),
-                        ],
-                      ),
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.all(4.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              _touch(),
-                              _touch(),
-                              _touch(),
-                              _touch(),
-                              _touch(),
-                            ],
-                          ),
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.all(4.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  _touch(),
-                                  _touch(),
-                                  _touch(),
-                                  _touch(),
-                                  _touch(),
-                                ],
-                              ),
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Padding(padding: EdgeInsets.all(4.0),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    children: <Widget>[
-                                      _touch(),
-                                      _touch(),
-                                      _touch(),
-                                      _touch(),
-                                      _touch(),
-                                    ],
-                                  ),
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: <Widget>[
-                                    Padding(padding: EdgeInsets.all(4.0),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: <Widget>[
-                                          _touch(),
-                                          _touch(),
-                                          _touch(),
-                                          _touch(),
-                                          _touch(),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: <Widget>[
-                                    Padding(padding: EdgeInsets.all(4.0),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: <Widget>[
-                                          _touch(),
-                                          _touch(),
-                                          _touch(),
-                                          _touch(),
-                                          _touch(),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: <Widget>[
-                                    Padding(padding: EdgeInsets.all(4.0),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: <Widget>[
-                                          _touch(),
-                                          _touch(),
-                                          _touch(),
-                                          _touch(),
-                                          _touch(),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              ],
-            ),
-          ],
+    Fluttertoast.showToast(
+        msg: "손가락으로 사각형을 터치하면 색깔이 바뀝니다",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 10,
+        backgroundColor: Colors.white,
+        textColor: Colors.black,
+        fontSize: 15.0);
+    return Scaffold(
+      body: Container(
+        child: GridView.count(
+          crossAxisCount: 5,
+          children: List.generate(45, (index) {
+            return MyWidget(
+              index: index,
+              color: cellColor,
+            );
+          }),
+        ),
+      ),
+
+    );
+
+  }
+}
+
+class MyWidget extends StatefulWidget {
+  final Color color;
+  final int index;
+
+  MyWidget({this.color, this.index});
+
+  @override
+  _MyWidgetState createState() => new _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  Color cellColor = Colors.black;
+
+  @override
+  void initState() {
+    super.initState();
+    cellColor = widget.color;
+  }
+
+  _changeCell(index) {
+    setState(() {
+      switch (index) {
+        case 0:
+          cellColor = Colors.red;
+          break;
+        case 1:
+          cellColor = Colors.red;
+          break;
+        case 2:
+          cellColor = Colors.red;
+          break;
+        case 3:
+          cellColor = Colors.red;
+          break;
+        case 4:
+          cellColor = Colors.red;
+          break;
+        default:
+          cellColor = Colors.red;
+          break;
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => _changeCell(widget.index),
+      child: Container(
+        margin: EdgeInsets.all(3.0),
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          color: cellColor,
         ),
       ),
     );
   }
-
-  Widget _touch() {
-    return Container(
-      child: PositionedTapDetector(
-          child: AnimatedOpacity(
-            opacity: _visible ? 1.0:0.0,
-            duration: Duration(microseconds: 500),
-            child: Container(
-              width: 70.0,
-              height: 70.0,
-              color: Colors.lightBlueAccent,
-            ),
-          ),
-          onTap: _onTap
-      ),
-    );
-  }
-
-  void _onTap(TapPosition position) => _updateState("single tap", position);
-
-  void _updateState(String gesture, TapPosition position) {
-    setState(() {
-      _visible =! _visible;
-
-    }
-    );
-  }
-
-  String _formatOffset(Offset offset) =>
-      "${offset.dx.toStringAsFixed(1)}, ${offset.dy.toStringAsFixed(1)}";
 }
