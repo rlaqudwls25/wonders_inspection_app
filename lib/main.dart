@@ -61,15 +61,62 @@ class _MyHomePageState extends State<MyHomePage> {
       onWillPop: () => _onBackPressed(),
       child: Scaffold(
         body: Center(child: _pages[_selectedIndex]),
-        bottomNavigationBar: BottomNavigationBar(
-            onTap: _onItemTapped,
-            currentIndex: _selectedIndex,
-            items: <BottomNavigationBarItem>[
-              BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('진단')),
-              BottomNavigationBarItem(icon: Icon(Icons.perm_device_information), title: Text('휴대폰 정보')),
-              BottomNavigationBarItem(icon: Icon(Icons.backup), title: Text('초기화')),
-            ]),
-      ),
+        backgroundColor: Colors.blueAccent,
+        floatingActionButton: Padding(
+          padding: EdgeInsets.only(top: 20),
+          child: SizedBox(
+            height: 70,
+            width: 70,
+            child: FloatingActionButton(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              onPressed: () {},
+              child: Container(
+                height: 75,
+                width: 75,
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white, width: 4),
+                    shape: BoxShape.circle,
+                    color: Colors.redAccent
+                ),
+                child: Center(child: Text('초기화')),
+              ),
+            ),
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        bottomNavigationBar:
+        Container(
+          height: 60.0,
+          color: Colors.white,
+          child: Theme(
+            data: Theme.of(context).copyWith(
+                canvasColor: Colors.white,
+                primaryColor: Colors.redAccent,
+                bottomAppBarColor: Colors.green,
+                textTheme: Theme
+                    .of(context)
+                    .textTheme
+                    .copyWith(caption: TextStyle(color: Colors.grey))),
+            child:
+            BottomNavigationBar(
+                type: BottomNavigationBarType.fixed,
+                onTap: _onItemTapped,
+                currentIndex: _selectedIndex,
+                items: [
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.verified_user),
+                      title: Text('진단'),
+                      backgroundColor: Colors.black
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.perm_device_information),
+                    title: Text('휴대폰 정보'),
+                  ),
+                ]),
+          ),
+        ),
+      )
     );
   }
 
