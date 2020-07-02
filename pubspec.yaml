@@ -36,6 +36,7 @@ dependencies:
   google_maps_flutter: ^0.5.21+15
   shared_preferences: ^0.5.7+3
   provider: ^3.0.0+1
+  proximity_plugin: ^1.0.2
   flutter:
     sdk: flutter
 

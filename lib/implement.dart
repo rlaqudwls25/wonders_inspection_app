@@ -62,7 +62,7 @@ class Implement extends StatelessWidget {
                         children: <Widget>[
                           _buildButton(
                               'Gps', context, Gps(), inspection.getGps()),
-                          _buildButton('접근센서', context, Proximity(), null),
+                          _buildButton('접근센서', context, Proximity(), inspection.getProximity()),
                           _buildButton('나침반', context, Compass(), null),
                         ],
                       ),
