@@ -3,6 +3,8 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:wondersappver02/models/inspection.dart';
 
 class Gps extends StatefulWidget {
   @override
@@ -27,7 +29,7 @@ class _GpsState extends State<Gps> {
   void initState() {
     super.initState();
     _getCurrentLocation();
-    Future.delayed(Duration(seconds:3), () => _moveToCurrentLocation());
+    Future.delayed(Duration(milliseconds:3000), () => _moveToCurrentLocation());
   }
 
   //현재 위치 가져오기
@@ -72,6 +74,8 @@ class _GpsState extends State<Gps> {
 
   @override
   Widget build(BuildContext context) {
+    Inspection inspection = Provider.of<Inspection>(context);
+    if(inspection.getGps() == null) inspection.setGps('fail');
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -113,7 +117,9 @@ class _GpsState extends State<Gps> {
                 margin: EdgeInsets.all(20),
                 child: RaisedButton(
                   onPressed: () {
-                    //TODO - 일치할 때 로직
+                    //일치할 때
+                    inspection.setGps('success');
+                    Navigator.of(context).pop();
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50.0)),
@@ -127,7 +133,9 @@ class _GpsState extends State<Gps> {
                 margin: EdgeInsets.all(20),
                 child: RaisedButton(
                   onPressed: () {
-                    //TODO - 불일치할 때 로직
+                    //불일치할 때
+                    inspection.setGps('fail');
+                    Navigator.of(context).pop();
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50.0)),
