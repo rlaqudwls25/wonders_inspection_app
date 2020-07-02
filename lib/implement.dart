@@ -30,6 +30,7 @@ class Implement extends StatelessWidget {
         ),
       ),
       body: ListView(
+        padding: EdgeInsets.only(top:30, bottom:30),
         children: <Widget>[
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -101,7 +102,6 @@ class Implement extends StatelessWidget {
               )
             ],
           ),
-          SizedBox(height: 30,)
         ],
       ),
     );
