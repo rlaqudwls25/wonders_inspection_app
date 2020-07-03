@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-void showToast(context) {
+void showToast(context, bool) {
   Fluttertoast.showToast(
       msg: "성공!",
       toastLength: Toast.LENGTH_SHORT,
@@ -10,5 +10,7 @@ void showToast(context) {
       backgroundColor: Colors.redAccent,
       textColor: Colors.white,
       fontSize: 18.0);
-  Future.delayed(Duration(milliseconds: 2500), () => Navigator.pop(context));
+  if(bool == true){
+    Future.delayed(Duration(milliseconds: 2500), () => Navigator.pop(context));
+  }
 }

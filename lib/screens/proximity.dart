@@ -98,7 +98,8 @@ class _ProximityState extends State<Proximity> {
                   height: 100,
                   width: 100,
                   margin: EdgeInsets.all(20),
-                  child: Icon(Icons.flash_on, size: 50, color: Colors.white),
+                  padding: EdgeInsets.only(right:8),
+                  child: Icon(Icons.pan_tool, size: 50, color: Colors.white),
                   decoration: BoxDecoration(
                       color: _proximity == 'Yes' ? Colors.cyan : Colors.red,
                       shape: BoxShape.circle,
