@@ -1,5 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+
+
 
 class Touch extends StatefulWidget {
   @override
@@ -19,27 +23,161 @@ class _TouchState extends State<Touch> {
         backgroundColor: Colors.white,
         textColor: Colors.black,
         fontSize: 15.0);
-    return Scaffold(
-      body: Container(
-        child: GridView.count(
-          crossAxisCount: 5,
-          children: List.generate(45, (index) {
-            return MyWidget(
-              index: index,
-              color: cellColor,
-            );
-          }),
+
+    return MaterialApp(
+      home: Scaffold(
+        body: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.all(1.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    touch(context),
+                    touch(context),
+                    touch(context),
+                    touch(context),
+                    touch(context),
+                  ],
+                ),
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(padding: EdgeInsets.all(1.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        touch(context),
+                        touch(context),
+                        touch(context),
+                        touch(context),
+                        touch(context),
+                      ],
+                    ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Padding(padding: EdgeInsets.all(1.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            touch(context),
+                            touch(context),
+                            touch(context),
+                            touch(context),
+                            touch(context),
+                          ],
+                        ),
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          
+                          Padding(padding: EdgeInsets.all(1.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: <Widget>[
+                                touch(context),
+                                touch(context),
+                                touch(context),
+                                touch(context),
+                                touch(context),
+                              ],
+                            ),
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Padding(padding: EdgeInsets.all(1.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    touch(context),
+                                    touch(context),
+                                    touch(context),
+                                    touch(context),
+                                    touch(context),
+                                  ],
+                                ),
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Padding(padding: EdgeInsets.all(1.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: <Widget>[
+                                        touch(context),
+                                        touch(context),
+                                        touch(context),
+                                        touch(context),
+                                        touch(context),
+                                      ],
+                                    ),
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        children: <Widget>[
+                                          touch(context),
+                                          touch(context),
+                                          touch(context),
+                                          touch(context),
+                                          touch(context),
+                                        ],
+                                      )
+                                    ],
+                                  )
+                                ],
+                              )
+                            ],
+                          )
+                        ],
+                      )
+                    ],
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
-
     );
-
   }
+
+  Widget touch(BuildContext context){
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double screenPadding = MediaQuery.of(context).padding.top;
+    return Container(
+      width: (screenWidth - screenPadding) / 4.9,
+      height: (screenHeight - screenPadding) / 7.0,
+      color: Colors.red,
+      child: MyWidget(
+        color: cellColor,
+      ),
+    );
+  }
+
+//  void shape(){
+//    for(var i=0; i<5; i++){
+//      for(var j=0; j<8; j++){
+//      }]
+
+//    }
+//  }
 }
 
 class MyWidget extends StatefulWidget {
   final Color color;
   final int index;
+
 
   MyWidget({this.color, this.index});
 
@@ -78,21 +216,20 @@ class _MyWidgetState extends State<MyWidget> {
           cellColor = Colors.red;
           break;
       }
-    });
+    }
+    );
   }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => _changeCell(widget.index),
       child: Container(
-        margin: EdgeInsets.all(3.0),
-        width: double.infinity,
-        height: double.infinity,
         decoration: BoxDecoration(
           color: cellColor,
         ),
       ),
     );
   }
+
+
 }
