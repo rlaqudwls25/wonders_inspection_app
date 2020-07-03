@@ -51,7 +51,7 @@ class Implement extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       _buildButton('터치', context, Touch(), null),
-                      _buildButton('방향센서', context, Direction(), null),
+                      _buildButton('방향센서', context, Direction(), inspection.getDirection()),
                       _buildButton('red', context, Red(), null),
                     ],
                   ),
@@ -61,10 +61,9 @@ class Implement extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          _buildButton(
-                              'Gps', context, Gps(), inspection.getGps()),
+                          _buildButton('Gps', context, Gps(), inspection.getGps()),
                           _buildButton('접근센서', context, Proximity(), inspection.getProximity()),
-                          _buildButton('나침반', context, Compass(), null),
+                          _buildButton('나침반', context, Compass(), inspection.getCompass()),
                         ],
                       ),
                       Column(
@@ -73,23 +72,20 @@ class Implement extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
-                              _buildButton('와이파이', context, Wifi(), null), //X
+                              _buildButton('와이파이', context, Wifi(), null),
                               _buildButton('블루투스', context, Bluetooth(), null),
-                              _buildButton('blue', context, Blue(), null), //X
+                              _buildButton('blue', context, Blue(), null),
                             ],
                           ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
                                   _buildButton('손전등', context, Flash(), null),
                                   _buildButton('green', context, Green(), null),
-                                  _buildButton(
-                                      '진동검사', context, Vibration(), null),
-                                  //X
+                                  _buildButton('진동검사', context, Vibration(), null),
                                 ],
                               ),
                             ],

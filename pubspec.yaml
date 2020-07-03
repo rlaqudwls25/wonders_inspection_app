@@ -25,7 +25,7 @@ dependencies:
   flashlight: ^0.1.1
   vibration: ^1.4.0
   device_info: ^0.4.2+4
-  flutter_compass: ^0.4.2+1
+  flutter_sensor_compass: ^0.1.1
   sensors: ^0.4.2+2
   camera: ^0.5.8+2
   mic_stream: ^0.2.1

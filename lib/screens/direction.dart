@@ -1,7 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sensors/sensors.dart';
+import 'package:wondersappver02/models/inspection.dart';
+import 'package:wondersappver02/util/dialog_util.dart' as dialogUtil;
 
 class Direction extends StatefulWidget {
   @override
@@ -90,8 +93,12 @@ class _DirectionState extends State<Direction> {
     if (timer == null || !timer.isActive) {
       timer = Timer.periodic(Duration(milliseconds: 200), (_) {
         // if count has increased greater than 3 call pause timer to handle success
+        // 성공시
         if (count > 3) {
           pauseTimer();
+          dialogUtil.showToast(context);
+          Navigator.pop(context);
+          Provider.of<Inspection>(context).setDirection('success');
         } else {
           // proccess the current event
           setColor(event);
@@ -111,6 +118,11 @@ class _DirectionState extends State<Direction> {
       count = 0;
       color = Colors.green;
     });
+  }
+
+  @override
+  void initState() {
+    startTimer();
   }
 
   @override
@@ -144,10 +156,6 @@ class _DirectionState extends State<Direction> {
         ),
         body: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text('원 안으로 공을 이동시킨 후에 1초동안 유지하세요.', style: TextStyle(fontSize: 15)),
-            ),
             Stack(
               children: [
                 // This empty container is given a width and height to set the size of the stack
@@ -155,7 +163,6 @@ class _DirectionState extends State<Direction> {
                   height: height / 2,
                   width: width,
                 ),
-
                 // Create the outer target circle wrapped in a Position
                 // 시작 원
                 Positioned(
@@ -201,17 +208,21 @@ class _DirectionState extends State<Direction> {
                 ),
               ],
             ),
-            Text('x: ${(event?.x ?? 0).toStringAsFixed(3)}'),
-            Text('y: ${(event?.y ?? 0).toStringAsFixed(3)}'),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-              child: RaisedButton(
-                onPressed: startTimer,
-                child: Text('시작'),
-                color: Theme.of(context).primaryColor,
-                textColor: Colors.white,
-              ),
-            )
+              padding: const EdgeInsets.all(8.0),
+              child: Text('원 안으로 공을 이동시킨 후에 1초동안 유지하세요.', style: TextStyle(fontSize: 17.0)),
+            ),
+//            Text('x: ${(event?.x ?? 0).toStringAsFixed(3)}'),
+//            Text('y: ${(event?.y ?? 0).toStringAsFixed(3)}'),
+//            Padding(
+//              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+//              child: RaisedButton(
+//                onPressed: startTimer,
+//                child: Text('시작'),
+//                color: Theme.of(context).primaryColor,
+//                textColor: Colors.white,
+//              ),
+//            )
           ],
         ),
       ),
