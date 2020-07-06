@@ -96,7 +96,7 @@ class _DirectionState extends State<Direction> {
         // 성공시
         if (count > 3) {
           pauseTimer();
-          dialogUtil.showToast(context, true);
+          dialogUtil.showToast(context, true, Colors.redAccent);
           Provider.of<Inspection>(context).setDirection('success');
         } else {
           // proccess the current event

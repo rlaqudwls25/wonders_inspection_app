@@ -15,6 +15,7 @@ class Inspection with ChangeNotifier{
   String red;
   String vibration;
   String wifi;
+  String touch;
 
   Inspection(
       {this.blue,
@@ -30,7 +31,8 @@ class Inspection with ChangeNotifier{
       this.proximity,
       this.red,
       this.vibration,
-      this.wifi});
+      this.wifi,
+      this.touch});
 
   String getBlue() => blue;
   String getBluetooth() => bluetooth;
@@ -46,6 +48,7 @@ class Inspection with ChangeNotifier{
   String getRed() => red;
   String getVibration() => vibration;
   String getWifi() => wifi;
+  String getTouch() => touch;
 
   void setBlue(String blue){
     this.blue = blue;
@@ -103,6 +106,13 @@ class Inspection with ChangeNotifier{
     this.wifi = wifi;
     notifyListeners();
   }
+  void setTouch(String touch){
+    this.touch = touch;
+    notifyListeners();
+  }
+  void initData(){
+
+  }
 
   Map<String, dynamic> toJson() => {
         'blue': blue,
@@ -118,7 +128,8 @@ class Inspection with ChangeNotifier{
         'proximity': proximity,
         'red': red,
         'vibration': vibration,
-        'wifi': wifi
+        'wifi': wifi,
+        'touch': touch
       };
 
   Inspection.fromJson(Map<String, dynamic> json)
@@ -135,5 +146,6 @@ class Inspection with ChangeNotifier{
         proximity = json['proximity'],
         red = json['red'],
         vibration = json['vibration'],
-        wifi = json['wifi'];
+        wifi = json['wifi'],
+        touch = json['touch'];
 }

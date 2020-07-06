@@ -35,7 +35,7 @@ class _CompassState extends State<Compass> {
         });
         if(randomNum.toString() == _degrees.toStringAsFixed(0)){
           _stopCompass();
-          dialogUtil.showToast(context, true);
+          dialogUtil.showToast(context, true, Colors.redAccent);
           Provider.of<Inspection>(context).setCompass('success');
         }
       }

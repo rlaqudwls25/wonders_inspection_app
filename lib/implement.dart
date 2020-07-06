@@ -50,7 +50,7 @@ class Implement extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      _buildButton('터치', context, Touch(), null),
+                      _buildButton('터치', context, Touch(), inspection.getTouch()),
                       _buildButton('방향센서', context, Direction(), inspection.getDirection()),
                       _buildButton('red', context, Red(), null),
                     ],
