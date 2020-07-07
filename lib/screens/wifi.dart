@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:progress_dialog/progress_dialog.dart';
+import 'package:provider/provider.dart';
 import 'package:wifi_hunter/wifi_hunter.dart';
 import 'package:app_settings/app_settings.dart';
+import 'package:wondersappver02/models/inspection.dart';
 
 class Wifi extends StatefulWidget {
   @override
@@ -194,7 +196,8 @@ class _WifiState extends State<Wifi> {
     switch (result) {
       case ConnectivityResult.wifi:
         String wifiName, wifiBSSID, wifiIP;
-
+        //와이파이 연결 성공시
+        Provider.of<Inspection>(context).setWifi('success');
         try {
           if (!kIsWeb && Platform.isIOS) {
             LocationAuthorizationStatus status =

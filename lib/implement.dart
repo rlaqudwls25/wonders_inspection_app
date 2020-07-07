@@ -72,7 +72,7 @@ class Implement extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
-                              _buildButton('와이파이', context, Wifi(), null),
+                              _buildButton('와이파이', context, Wifi(), inspection.getWifi()),
                               _buildButton('블루투스', context, Bluetooth(), null),
                               _buildButton('blue', context, Blue(), null),
                             ],
